@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/game")
 public class GameController {
-
-    @GetMapping("/hello-world")
-    public String HelloWorld(){
-        return "Hello World";
-    }
+    
 
 }

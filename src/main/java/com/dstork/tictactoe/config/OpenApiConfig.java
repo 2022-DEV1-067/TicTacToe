@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 //http://localhost:8090/swagger-ui.html
 
-
 @Configuration
 public class OpenApiConfig {
     @Bean
