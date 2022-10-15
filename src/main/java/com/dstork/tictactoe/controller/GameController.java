@@ -1,4 +1,4 @@
-package com.dstork.tictactoe.controllers;
+package com.dstork.tictactoe.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
