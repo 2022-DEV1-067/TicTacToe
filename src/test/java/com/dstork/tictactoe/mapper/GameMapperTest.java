@@ -2,6 +2,7 @@ package com.dstork.tictactoe.mapper;
 
 import com.dstork.tictactoe.dto.GameDTO;
 import com.dstork.tictactoe.enums.GameStatus;
+import com.dstork.tictactoe.fixture.GameFixture;
 import com.dstork.tictactoe.model.Game;
 import com.dstork.tictactoe.model.Player;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ class GameMapperTest {
     void MapGameToGameDTO(){
 
         //Creation of assets
-        Game game = getSampleGame();
+        Game game = GameFixture.getSampleGame(2);
 
         //Applying the mothod
         GameDTO gameDTO = gameMapper.mapGameToGameDTO(game);
@@ -32,15 +33,6 @@ class GameMapperTest {
     }
 
 
-    private Game getSampleGame(){
-        Player playerX = new Player("Zack");
-        Player playerO = new Player("Sns");
 
-        Game game = new Game();
-        game.setPlayerO(playerO);
-        game.setPlayerX(playerX);
-        game.setGameStatus(GameStatus.O_TURN);
-        return game;
-    }
 
 }

@@ -2,10 +2,10 @@ package com.dstork.tictactoe.controller;
 
 import com.dstork.tictactoe.dto.GameDTO;
 import com.dstork.tictactoe.dto.GameMoveDTO;
+import com.dstork.tictactoe.services.GameService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +17,8 @@ import java.net.URI;
 @RequestMapping("/game")
 public class GameController {
 
+    private final GameService gameService;
+    Logger logger = LogManager.getLogger(GameController.class);
     private final String GAME = "/TicTacToe/Game/";
 
     @GetMapping(path = "/{Id}", produces = "application/json")
