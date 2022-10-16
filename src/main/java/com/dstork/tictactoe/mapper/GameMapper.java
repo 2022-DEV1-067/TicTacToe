@@ -18,7 +18,8 @@ public class GameMapper {
     }
 
     public GameDTO mapGameToGameDTO(Game game) {
-        return null;
+        return modelMapper.map(game, GameDTO.class);
     }
+
 
 }
