@@ -29,7 +29,6 @@ class GameMapperTest {
         assertEquals(gameDTO.getPlayerO().getLogin(),game.getPlayerO().getLogin());
         assertEquals(gameDTO.getPlayerX().getLogin(),game.getPlayerX().getLogin());
 
-
     }
 
 
