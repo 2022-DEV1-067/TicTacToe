@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Range;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +18,7 @@ public class GameMoveDTO extends  AbstractDTO{
     private String playerLogin;
     @NotNull
     private Long gameId;
-    @Range(from = 1, to= 9)
+    @Max(9)
+    @Min(1)
     private int position;
 }
