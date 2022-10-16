@@ -17,13 +17,16 @@ public class GameFixture {
 
     public static Game getSampleGame(int PlayersNumber) {
         Game game = new Game();
-
         Player playerX = new Player("Zack");
         if (PlayersNumber == 1) {
+            game.setId(1L);
+            game.setVersion(1L);
             game.setPlayerX(playerX);
             game.setGameStatus(PENDING);
         } else {
             Player playerO = new Player("Sns");
+            game.setId(2L);
+            game.setVersion(2L);
             game.setPlayerX(playerX);
             game.setPlayerO(playerO);
             game.setGameStatus(O_TURN);
@@ -37,10 +40,14 @@ public class GameFixture {
 
         PlayerDTO playerX = new PlayerDTO("Zack");
         if (PlayersNumber == 1) {
+            gameDTO.setId(1L);
+            gameDTO.setVersion(1L);
             gameDTO.setPlayerX(playerX);
             gameDTO.setGameStatus(PENDING);
         } else if (PlayersNumber == 2)  {
             PlayerDTO playerO = new PlayerDTO("Sns");
+            gameDTO.setId(2L);
+            gameDTO.setVersion(2L);
             gameDTO.setPlayerX(playerX);
             gameDTO.setPlayerO(playerO);
             gameDTO.setGameStatus(X_TURN);

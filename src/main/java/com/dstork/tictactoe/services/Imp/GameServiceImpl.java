@@ -8,6 +8,8 @@ import com.dstork.tictactoe.services.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class GameServiceImpl implements GameService {
@@ -16,22 +18,22 @@ public class GameServiceImpl implements GameService {
     private final PlayerRepository playerRepository;
 
     @Override
-    public GameDTO findGameById(Long id) {
+    public Optional<GameDTO> findGameById(Long id) {
         return null;
     }
 
     @Override
-    public GameDTO startGame(String playerLogin) {
+    public Optional<GameDTO> startGame(String playerLogin) {
         return null;
     }
 
     @Override
-    public GameDTO cancelGame(Long gameId) {
+    public Optional<GameDTO> cancelGame(Long gameId) {
         return null;
     }
 
     @Override
-    public GameDTO makeGameMove(GameMoveDTO gameMoveDTO) {
+    public Optional<GameDTO> makeGameMove(GameMoveDTO gameMoveDTO) {
         return null;
     }
 }
