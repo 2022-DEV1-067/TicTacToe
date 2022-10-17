@@ -74,8 +74,8 @@ class GameControllerTest {
         GameDTO gameDTO = GameFixture.getSampleGameDTO(1);
         when(gameService.startGame(any(String.class))).thenReturn(Optional.of(gameDTO));
 
-        String PlayerLogin = "Zack";
-        ResponseEntity<GameDTO> responseEntity = gameController.startGame(PlayerLogin);
+        String playerLogin = "Zack";
+        ResponseEntity<GameDTO> responseEntity = gameController.startGame(playerLogin);
 
         assertNotNull(responseEntity.getBody());
         Assertions.assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
@@ -92,9 +92,9 @@ class GameControllerTest {
         GameDTO gameDTO = GameFixture.getSampleGameDTO(2);
         when(gameService.startGame(any(String.class))).thenReturn(Optional.of(gameDTO));
 
-        String PlayerLogin = "Sns";
+        String playerLogin = "Sns";
 
-        ResponseEntity<GameDTO> responseEntity = gameController.startGame(PlayerLogin);
+        ResponseEntity<GameDTO> responseEntity = gameController.startGame(playerLogin);
 
         assertNotNull(responseEntity.getBody());
         Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
