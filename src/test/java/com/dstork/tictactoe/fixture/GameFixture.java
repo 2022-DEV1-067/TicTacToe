@@ -81,11 +81,44 @@ public class GameFixture {
         GameBoard.put(2, X);
         GameBoard.put(3, O);
         GameBoard.put(4, O);
-        GameBoard.put(5, O);
+        GameBoard.put(5, null);
         GameBoard.put(6, X);
         GameBoard.put(7, X);
         GameBoard.put(8, O);
         GameBoard.put(9, O);
+        return GameBoard;
+    }
+
+
+
+    public static Map<Integer, PositionValue> getGameBoardWhenXWins (){
+
+        Map<Integer, PositionValue> GameBoard = new HashMap<>();
+        GameBoard.put(1, X);
+        GameBoard.put(2, X);
+        GameBoard.put(3, X);
+        GameBoard.put(4, O);
+        GameBoard.put(5, null);
+        GameBoard.put(6, null);
+        GameBoard.put(7, null);
+        GameBoard.put(8, O);
+        GameBoard.put(9, O);
+        return GameBoard;
+    }
+
+
+    public static Map<Integer, PositionValue> getGameBoardWhenOWins (){
+
+        Map<Integer, PositionValue> GameBoard = new HashMap<>();
+        GameBoard.put(1, O);
+        GameBoard.put(2, O);
+        GameBoard.put(3, O);
+        GameBoard.put(4, X);
+        GameBoard.put(5, null);
+        GameBoard.put(6, null);
+        GameBoard.put(7, null);
+        GameBoard.put(8, X);
+        GameBoard.put(9, X);
         return GameBoard;
     }
 
