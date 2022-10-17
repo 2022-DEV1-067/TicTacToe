@@ -4,16 +4,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
-public class ExceptionHandler {
+public class TicTacToeExceptionHandler {
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(ResourceNotFoundException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorMessage> resourceNotFoundExceptionHandler(ResourceNotFoundException ex, WebRequest request) {
         ErrorMessage message = new ErrorMessage(
                 HttpStatus.NOT_FOUND.value(),
@@ -25,7 +25,7 @@ public class ExceptionHandler {
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorMessage> handleValidationExceptions(MethodArgumentNotValidException ex) {
         ErrorMessage message = new ErrorMessage();
         List<String> errors = ex.getBindingResult().getFieldErrors().stream()
@@ -38,7 +38,7 @@ public class ExceptionHandler {
     }
 
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(NotAllowedException.class)
+    @ExceptionHandler(NotAllowedException.class)
     public ResponseEntity<ErrorMessage> notAllowedExceptionHandler(NotAllowedException ex, WebRequest request) {
         ErrorMessage message = new ErrorMessage(
                 HttpStatus.METHOD_NOT_ALLOWED.value(),
@@ -51,7 +51,7 @@ public class ExceptionHandler {
     }
 
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(BadRequestException.class)
+    @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ErrorMessage> badRequestExceptionHandler(BadRequestException ex, WebRequest request) {
         ErrorMessage message = new ErrorMessage(
                 HttpStatus.BAD_REQUEST.value(),
