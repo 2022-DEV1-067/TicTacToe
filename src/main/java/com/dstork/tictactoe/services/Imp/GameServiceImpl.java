@@ -36,8 +36,8 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public Optional<GameDTO> findGameById(Long id) {
-        Game game = gameRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Game with Id: " + id + " Not Found"));
+        Game game = gameRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Game with Id: " + id + " Not Found"));
 
         logger.info("Game Details with Id : {}  Retrieved.", game.getId());
         return Optional.of(gameMapper.mapGameToGameDTO(game));
@@ -48,7 +48,7 @@ public class GameServiceImpl implements GameService {
         List<GameStatus> statusList = Arrays.asList(PENDING, O_TURN, X_TURN);
 
         Player player = playerRepository.findByLogin(playerLogin)
-                .orElseThrow(() -> new ResourceNotFoundException("Player with Login " + playerLogin + " Not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Player with Login " + playerLogin + "  Not Found"));
 
         List<Game> playerGames = gameRepository.findByGameStatusInAndPlayerX_IdOrGameStatusInAndPlayerO_Id(statusList, player.getId(), statusList, player.getId());
         if (!isEmptyList(playerGames)) {
@@ -62,8 +62,18 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public Optional<GameDTO> cancelGame(Long gameId) {
-        return null;
+    public Optional<GameDTO> cancelGame(Long id) {
+        Game game = gameRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Game with Id: " + id + " Not Found"));
+
+        if (isFinalGameStatus(game)) {
+            throw new NotAllowedException("Game with Id: " + game.getId() + " Can not be Cancelled");
+        }
+        game.setGameStatus(CANCELLED);
+        game = gameRepository.save(game);
+        logger.info("Game with Id:  {} is Cancelled", id);
+
+        return Optional.of(gameMapper.mapGameToGameDTO(game));
     }
 
     @Override
@@ -76,6 +86,10 @@ public class GameServiceImpl implements GameService {
     }
     private static boolean isEmptyList(List<Game> playerGames) {
         return playerGames == null || playerGames.isEmpty();
+    }
+
+    private static boolean isFinalGameStatus(Game game) {
+        return game.getGameStatus() != PENDING && game.getGameStatus() != X_TURN && game.getGameStatus() != O_TURN;
     }
 
 }
