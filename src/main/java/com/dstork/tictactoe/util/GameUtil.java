@@ -32,7 +32,6 @@ public class GameUtil {
         return game;
     }
 
-
     private static Game fillGameBoard(Game game) {
 
         Map<Integer, PositionValue> gameBoard = new HashMap<>();
