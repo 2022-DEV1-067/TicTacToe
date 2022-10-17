@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 public class TicTacToeExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorMessage> resourceNotFoundExceptionHandler(ResourceNotFoundException ex, WebRequest request) {
-        ErrorMessage message = new ErrorMessage(
+    public ResponseEntity<ErrorResponse> resourceNotFoundExceptionHandler(ResourceNotFoundException ex, WebRequest request) {
+        ErrorResponse message = new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
                 new Date(),
                 ex.getMessage(),
@@ -27,8 +27,8 @@ public class TicTacToeExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorMessage> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        ErrorMessage message = new ErrorMessage();
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        ErrorResponse message = new ErrorResponse();
         List<String> errors = ex.getBindingResult().getFieldErrors().stream()
                 .map(source -> source.getField() + " : " + source.getDefaultMessage()).collect(Collectors.toList());
         message.setStatusCode(HttpStatus.BAD_REQUEST.value());
@@ -40,8 +40,8 @@ public class TicTacToeExceptionHandler {
 
 
     @ExceptionHandler(NotAllowedException.class)
-    public ResponseEntity<ErrorMessage> notAllowedExceptionHandler(NotAllowedException ex, WebRequest request) {
-        ErrorMessage message = new ErrorMessage(
+    public ResponseEntity<ErrorResponse> notAllowedExceptionHandler(NotAllowedException ex, WebRequest request) {
+        ErrorResponse message = new ErrorResponse(
                 HttpStatus.METHOD_NOT_ALLOWED.value(),
                 new Date(),
                 ex.getMessage(),
@@ -53,8 +53,8 @@ public class TicTacToeExceptionHandler {
 
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ErrorMessage> badRequestExceptionHandler(BadRequestException ex, WebRequest request) {
-        ErrorMessage message = new ErrorMessage(
+    public ResponseEntity<ErrorResponse> badRequestExceptionHandler(BadRequestException ex, WebRequest request) {
+        ErrorResponse message = new ErrorResponse(
                 HttpStatus.BAD_REQUEST.value(),
                 new Date(),
                 ex.getMessage(),

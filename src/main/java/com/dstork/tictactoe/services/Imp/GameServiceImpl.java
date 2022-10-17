@@ -128,18 +128,19 @@ public class GameServiceImpl implements GameService {
                 .orElseThrow(() -> new ResourceNotFoundException("Player with login " + gameMoveDTO.getPlayerLogin() + " Not found"));
 
         if (!isPlayerInGame(gameMoveDTO, game)) {
-            throw new NotAllowedException("Player with login:  " + game.getPlayerX().getLogin() + " Is not in the game");
+            throw new NotAllowedException("Player with login:  " + gameMoveDTO.getPlayerLogin() + " Is not in the game");
         }
         if (isGameDone(game)) {
             throw new NotAllowedException("Game with Id : " + game.getId() + " Already ended");
         }
 
-        if (!isPlayerSTurn(game, gameMoveDTO)) {
-            throw new BadRequestException("It is not the player:  " + game.getPlayerX().getLogin() + " 'S turn");
-        }
         if (game.getGameStatus() == PENDING) {
-            throw new NotAllowedException("Game with Id: " + game.getId() + "Is still waiting for the second player");
+            throw new NotAllowedException("Game with Id: " + game.getId() + " Is still waiting for the second player");
         }
+        if (!isPlayerSTurn(game, gameMoveDTO)) {
+            throw new BadRequestException("It is not the player:  " + gameMoveDTO.getPlayerLogin() + " 'S turn");
+        }
+
         if (game.getGameStatus() == CANCELLED) {
             throw new NotAllowedException("Game with Id : " + game.getId() + " Is already cancellled");
         }
