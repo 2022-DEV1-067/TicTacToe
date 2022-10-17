@@ -27,7 +27,7 @@ public class TicTacToeExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex, WebRequest request) {
         ErrorResponse message = new ErrorResponse();
         List<String> errors = ex.getBindingResult().getFieldErrors().stream()
                 .map(source -> source.getField() + " : " + source.getDefaultMessage()).collect(Collectors.toList());
