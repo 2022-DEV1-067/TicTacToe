@@ -43,7 +43,7 @@ class TicTacToeExceptionHandlerTest {
         MethodParameter parameter = null;
         BindingResult bindingResult = new BeanPropertyBindingResult(parameter, "Error sample");
         ResponseEntity<ErrorResponse> wrongTurnError = ticTacToeExceptionHandler.handleValidationExceptions(
-                new MethodArgumentNotValidException(parameter,bindingResult), request);
+                new MethodArgumentNotValidException(parameter, bindingResult), request);
         System.out.println(wrongTurnError);
 
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, wrongTurnError.getStatusCode());
