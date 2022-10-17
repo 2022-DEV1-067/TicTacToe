@@ -3,7 +3,6 @@ package com.dstork.tictactoe.controller;
 import com.dstork.tictactoe.dto.GameDTO;
 import com.dstork.tictactoe.dto.GameMoveDTO;
 import com.dstork.tictactoe.enums.GameStatus;
-import com.dstork.tictactoe.exceptions.BadRequestException;
 import com.dstork.tictactoe.fixture.GameFixture;
 import com.dstork.tictactoe.services.GameService;
 import org.junit.jupiter.api.Assertions;
