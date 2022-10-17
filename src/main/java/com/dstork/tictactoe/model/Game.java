@@ -13,7 +13,7 @@ import java.util.Map;
 @Getter
 @Setter
 @Entity
-public class Game  extends AbstractEntity{
+public class Game extends AbstractEntity {
     @OneToOne
     private Player playerX;
 
@@ -29,5 +29,5 @@ public class Game  extends AbstractEntity{
     @Enumerated(EnumType.STRING)
     @Column(name = "position_value", nullable = false)
     @CollectionTable(name = "gameBoards_values", joinColumns = @JoinColumn(name = "game_id"))
-    private Map<Integer, PositionValue> gameBoard ;
+    private Map<Integer, PositionValue> gameBoard;
 }

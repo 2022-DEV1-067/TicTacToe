@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Getter
 @Setter
-public class GameMoveDTO extends  AbstractDTO{
+public class GameMoveDTO extends AbstractDTO {
     @NotNull
     private String playerLogin;
     @NotNull

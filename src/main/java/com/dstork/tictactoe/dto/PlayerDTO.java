@@ -9,6 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PlayerDTO extends AbstractDTO{
+public class PlayerDTO extends AbstractDTO {
     private String login;
 }

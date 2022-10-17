@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Table
-public class Player  extends AbstractEntity{
+public class Player extends AbstractEntity {
     @Column(nullable = false)
     private String login;
 }
