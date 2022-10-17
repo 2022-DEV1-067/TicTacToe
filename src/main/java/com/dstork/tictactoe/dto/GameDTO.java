@@ -13,7 +13,7 @@ import java.util.Map;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GameDTO extends AbstractDTO{
+public class GameDTO extends AbstractDTO {
     private PlayerDTO playerX;
     private PlayerDTO playerO;
     private GameStatus gameStatus;
