@@ -10,7 +10,7 @@ import com.dstork.tictactoe.mapper.GameMapper;
 import com.dstork.tictactoe.model.Game;
 import com.dstork.tictactoe.repository.GameRepository;
 import com.dstork.tictactoe.repository.PlayerRepository;
-import com.dstork.tictactoe.services.Imp.GameServiceImpl;
+import com.dstork.tictactoe.services.imp.GameServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

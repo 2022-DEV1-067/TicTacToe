@@ -1,4 +1,4 @@
-package com.dstork.tictactoe.services.Imp;
+package com.dstork.tictactoe.services.imp;
 
 import com.dstork.tictactoe.dto.GameDTO;
 import com.dstork.tictactoe.dto.GameMoveDTO;
@@ -17,6 +17,9 @@ import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -66,10 +69,10 @@ public class GameServiceImpl implements GameService {
     @Override
     public Optional<GameDTO> cancelGame(Long id) {
         Game game = gameRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Game with Id: " + id + " Not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Game with Id: %s Not Found",id)));
 
         if (isFinalGameStatus(game)) {
-            throw new NotAllowedException("Game with Id: " + game.getId() + " Can not be Cancelled");
+            throw new NotAllowedException(String.format("Game with Id : %s Can not be Cancelled",id));
         }
         game.setGameStatus(CANCELLED);
         game = gameRepository.save(game);
@@ -79,6 +82,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    @Transactional( isolation = Isolation.READ_COMMITTED , propagation= Propagation.REQUIRED)
     public Optional<GameDTO> makeGameMove(GameMoveDTO gameMoveDTO) {
 
         Game game = gameRepository.findById(gameMoveDTO.getGameId()).orElseThrow(
@@ -124,8 +128,9 @@ public class GameServiceImpl implements GameService {
 
     public void checkGameMove(GameMoveDTO gameMoveDTO, Game game) {
 
-        playerRepository.findByLogin(gameMoveDTO.getPlayerLogin())
-                .orElseThrow(() -> new ResourceNotFoundException("Player with login " + gameMoveDTO.getPlayerLogin() + " Not found"));
+        if(playerRepository.findByLogin(gameMoveDTO.getPlayerLogin()).isEmpty()) {
+            throw   new ResourceNotFoundException("Player with login " + gameMoveDTO.getPlayerLogin() + " Not found");
+        }
 
         if (!isPlayerInGame(gameMoveDTO, game)) {
             throw new NotAllowedException("Player with login:  " + gameMoveDTO.getPlayerLogin() + " Is not in the game");
@@ -145,7 +150,7 @@ public class GameServiceImpl implements GameService {
             throw new NotAllowedException("Game with Id : " + game.getId() + " Is already cancellled");
         }
 
-        if (game.getGameBoard().containsValue(gameMoveDTO.getPosition())) {
+        if (game.getGameBoard().get(gameMoveDTO.getPosition()) != null) {
             throw new BadRequestException("The position " + gameMoveDTO.getPosition() + " Already filled in");
         }
 
